@@ -3,6 +3,7 @@ const authorization = require('../middleware/authorization');
 const dotenv = require('dotenv');
 dotenv.config();
 const { v4: uuidv4 } = require('uuid');
+const { s3 } = require('../utils/awsUtils');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const fileRouter = express.Router();
@@ -30,8 +31,8 @@ fileRouter.post('/files/upload', upload.single('file'), authorization, async (re
       data: {
         name: fileName,
         filePath: s3Response.Location,
-        folderId,
-        userId,
+        folderId: parseInt(folderId, 10),
+        userId: parseInt(userId, 10),
       },
     });
 
