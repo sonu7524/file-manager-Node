@@ -7,6 +7,7 @@ const prisma = new PrismaClient({
 });
 const { generateToken, hashPassword, comparePassword } = require('../utils/authUtils');
 
+// Register a new user
 router.post('/auth/register', async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -38,6 +39,7 @@ router.post('/auth/register', async (req, res) => {
   }
 });
 
+// Login a user
 router.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
 
